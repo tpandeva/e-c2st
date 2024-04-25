@@ -57,3 +57,4 @@ train:
   save_dir: ""
   l1_lambda: 0.0
   l2_lambda: 0.0
+  lambda_null: 0.5
