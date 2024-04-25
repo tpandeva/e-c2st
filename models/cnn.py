@@ -28,7 +28,7 @@ class CNN(nn.Module):
             nn.Conv2d(ndf * 4, 1, 3, 2, 1, bias=bias),
             nn.Flatten(),
             nn.LeakyReLU(0.2, inplace=True),
-            nn.Linear(4,1, bias=bias)
+            nn.Linear(4,2, bias=bias)
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
