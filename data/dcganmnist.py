@@ -32,7 +32,7 @@ class DCGANMNISTDataGen(DataGenerator):
         # Load the MNIST dataset
         mnist = torchvision.datasets.MNIST(file_path1, train=True, transform=transforms_MNIST, download=True)
         loader = torch.utils.data.DataLoader(mnist, batch_size=len(mnist), shuffle=True)
-        data_true = next(iter(loader))
+        data_true = next(iter(loader))[0]
             
         data_gen = pickle.load(open(file_path2, 'rb'))
         data_gen = torch.from_numpy(data_gen[0])
@@ -42,7 +42,6 @@ class DCGANMNISTDataGen(DataGenerator):
         self.data_gen = torch.flatten(data_gen, 1).float()
 
         n_samples = len(data_true)
-        print("n_samples",n_samples)
         self.X = 1.0 * torch.flatten(data_true[:(n_samples // 2), ...], 1).float()
         self.Y = 1.0 * torch.flatten(data_true[(n_samples // 2):, ...], 1).float()
         total_samples = min(min(self.X.shape[0], self.Y.shape[0]),data_gen.shape[0])
