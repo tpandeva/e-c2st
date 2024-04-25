@@ -42,8 +42,8 @@ class DCGANMNISTDataGen(DataGenerator):
         self.data_gen = torch.flatten(data_gen, 1).float()
 
         n_samples = len(data_true)
-        self.X = 1.0 * torch.flatten(data_true[:(n_samples) // 2, ...], 1).float()
-        self.Y = 1.0 * torch.flatten(data_true[(n_samples) // 2:, ...], 1).float()
+        self.X = 1.0 * torch.flatten(data_true[:(n_samples // 2), ...], 1).float()
+        self.Y = 1.0 * torch.flatten(data_true[(n_samples // 2):, ...], 1).float()
         total_samples = min(min(self.X.shape[0], self.Y.shape[0]),data_gen.shape[0])
 
 
