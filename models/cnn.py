@@ -4,9 +4,8 @@ from omegaconf import ListConfig
 
 class CNN(nn.Module):
     """
-    A multi-layer perceptron (MLP) with ReLU activation function and optional batch normalization and dropout layers.
+    A CNN
     """
-
     def __init__(self,  hidden_layer_size, bias=False, nc=1):
         super(CNN, self).__init__()
 
