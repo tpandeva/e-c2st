@@ -17,7 +17,7 @@ We also recommend to install wandb for logging. See https://docs.wandb.ai/quicks
    
 **MNIST**: The MNIST dataset consists of hand-written digits. The DCGAN generated images are taken from: https://github.com/fengliu90/DK-for-TST
 
-**KDEV**: Download the data from: https://kdef.se/download-2/ 
+**KDEF**: Download the data from: https://kdef.se/download-2/ 
 Separate the data into positive and negative images and store them in "data/positive" and "data/negative" folders.
 
 ## Running the code
