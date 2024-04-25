@@ -1,0 +1,4 @@
+_target_: "models.cnn.CNN"
+hidden_layer_size: 16
+bias: false
+nc: 1

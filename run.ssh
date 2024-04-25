@@ -1,0 +1,90 @@
+#!/bin/bash
+
+## BLOB ##
+
+# e-c2st
+for T in {1..30}
+do
+for s in {0..99}
+do
+    python train.py experiment=blob-two-sample-e-c2st data.data_seed=$s data.type="type2" train.seqs=$T&
+    python train.py experiment=blob-two-sample-e-c2st data.data_seed=$s data.type="type12" train.seqs=$T&
+    python train.py experiment=blob-two-sample-e-c2st data.data_seed=$s data.type="type11" train.seqs=$T
+    wait
+done
+done
+
+# baselines
+T=1
+for S in {1..30}
+do
+ts=$(($S*90+180))
+samples=$((10*$ts/14))
+for s in {0..99}
+do
+    python train.py experiment=blob-two-sample-baselines data.data_seed=$s data.type="type2" train.seqs=$T data.samples=$samples&
+    python train.py experiment=blob-two-sample-baselines data.data_seed=$s data.type="type12" train.seqs=$T data.samples=$samples&
+    python train.py experiment=blob-two-sample-baselines data.data_seed=$s data.type="type11" train.seqs=$T data.samples=$samples
+    wait
+done
+done
+
+## DCGAN-MNIST ##
+# e-c2st
+for p in 0 0.5 0.7 1
+do
+for T in {1..30}
+do
+for s in {0..99}
+do
+    python train_baselines.py experiment=dcgan-mnist-cnn-e-c2st data.p=$p data.data_seed=$s  train.seqs=$T
+wait
+done
+done
+done
+
+# baselines
+
+T=1
+for S in {1..30}
+do
+ts=$(($S*64+128))
+samples=$((10*$ts/14))
+for p in 0 0.5 0.7 1
+do
+for s in {0..99}
+do
+    python train_baselines.py experiment=dcgan-mnist-cnn-baselines data.p=$p data.data_seed=$s  train.seqs=$T data.samples=$samples
+wait
+done
+done
+done
+
+
+## KDEF ##
+# e-c2st
+for T in {1..30}
+do
+for s in {0..99}
+do
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type2" train.seqs=$T data.is data.is_sequential=true &
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type12" train.seqs=$T data.is_sequential=true &
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type11" train.seqs=$T data.is_sequential=true 
+    wait
+done
+done
+
+# baselines
+T=1
+for S in {1..30}
+do
+ts=$(($S*64+128))
+samples=$((10*$ts/14))
+for s in {0..99}
+do
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type2" train.seqs=$T data.samples=$samples data.is data.is_sequential=false &
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type12" train.seqs=$T data.samples=$samples data.is_sequential=false &
+    python train.py experiment=kdef-2st data.data_seed=$s data.type="type11" train.seqs=$T data.samples=$samples data.is_sequential=false
+    wait
+done
+done

@@ -1,0 +1,7 @@
+_target_: "data.kdef.KDEFDataGen"
+samples: 1000
+type: "type2"
+data_seed: 0
+path_to_data: "path/to/data/"
+p: 0
+is_sequential: true

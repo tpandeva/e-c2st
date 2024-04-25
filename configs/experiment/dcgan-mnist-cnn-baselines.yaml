@@ -1,0 +1,47 @@
+# @package _global_
+defaults:
+  - /data: dcganmnist
+  - /operator@tau1:
+      - projection
+  - /operator@tau2:
+      - swap
+      - projection
+  - /model: cnn
+
+project: "Test"
+seed: 0
+
+tau1:
+  projection:
+    input_dim: 0
+
+
+tau2:
+  swap:
+    p: 1024 # size of the image when flattened
+    d: 0
+  projection:
+    input_dim: 0
+
+data:
+  samples: 64
+  type: "type2"
+  data_seed: 100
+  is_sequential: false
+train:
+  name: "deep"
+  seed: 0
+  lr: 0.0001
+  earlystopping:
+    patience: 15
+    delta: 0.0
+  epochs: 1000
+  seqs: 50 # number of mini-batches
+  T: 0 #Warm start number of mini-batches used for the training only
+  alpha: 0.05 # significance level
+  batch_size: 64
+  save: false
+  save_dir: ""
+  l1_lambda: 0.00
+  l2_lambda: 0.00
+  lambda_null: 0.5
